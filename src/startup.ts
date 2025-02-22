@@ -1,13 +1,12 @@
-// @ts-ignore
-import * as info from "./info.js";
-import { loadAllObjects } from "./objectLoader/objectLoader.js";
+import * as window from "./window/window";
 
 export function startup() {
-    if (typeof ui !== "undefined") {
-        ui.registerMenuItem(info.name, () => onClickMenuItem());
+    if (network.mode !== "none") {
+        return;
     }
-}
 
-function onClickMenuItem() {
-    loadAllObjects();
+    if (typeof ui !== "undefined") {
+        window.initialize();
+        ui.registerMenuItem("Load All Objects", window.openWindow);
+    }
 }

@@ -82,7 +82,22 @@ function getCheckboxes() {
             checkbox({ text: "RCT2", isChecked: filter["rct2"] }),
             checkbox({ text: "RCT2 Wacky Worlds", isChecked: filter["wacky_worlds"] }),
             checkbox({ text: "RCT2 Time Twister", isChecked: filter["time_twister"] }),
-            checkbox({ text: "Custom", isChecked: filter["custom"] }),
+            checkbox({
+                text: "Custom",
+                isChecked: filter["custom"],
+                onChange: (isChecked) => {
+                    if (isChecked) {
+                        showWarning();
+                    }
+                },
+            }),
         ]),
     ];
+}
+
+function showWarning() {
+    ui.showError(
+        "WARNING!",
+        "This may bloat filesize and exceed limits if enough objects are installed",
+    );
 }

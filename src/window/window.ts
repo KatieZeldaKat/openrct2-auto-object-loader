@@ -34,7 +34,7 @@ export function initialize() {
         width: 325,
         height: "auto",
         position: "center",
-        colours: [Colour.LightPurple, Colour.Grey],
+        colours: [Colour.LightBlue, Colour.Grey],
         onOpen: () => (isWindowOpen = true),
         onClose: () => (isWindowOpen = false),
         content: windowContent(),

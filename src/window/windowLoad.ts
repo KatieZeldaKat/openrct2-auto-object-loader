@@ -3,6 +3,7 @@ import { SourceFilter, loadAllObjects } from "../objectLoader/objectLoader";
 
 const loadingText = "Loading...";
 const loadedText = "Objects successfully loaded!";
+const errorText = "{RED}{INT32} objects failed to load";
 const text = store(loadingText);
 
 let window: WindowTemplate;
@@ -13,7 +14,7 @@ export function initialize() {
         width: 200,
         height: "auto",
         position: "center",
-        colours: [Colour.LightPurple, Colour.Grey],
+        colours: [Colour.LightBlue, Colour.Grey],
         onOpen: () => (isWindowOpen = true),
         onClose: () => (isWindowOpen = false),
         content: [label({ text: text, alignment: "centred" })],
@@ -37,9 +38,13 @@ export function openWindowAndLoad(filter: SourceFilter) {
     text.set(loadingText);
 
     context.setTimeout(() => {
-        loadAllObjects(filter);
+        const errors = loadAllObjects(filter);
+        if (errors > 0) {
+            text.set(context.formatString(errorText, errors));
+        } else {
+            text.set(loadedText);
+        }
 
         window.focus();
-        text.set(loadedText);
     }, 50);
 }

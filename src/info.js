@@ -2,7 +2,7 @@ export const name = "auto-object-loader";
 export const authors = ["Katherine Norton (KatieZeldaKat)"];
 export const license = "MIT";
 
-export const version = "1.0.0";
+export const version = "1.0.1";
 export const type = "remote";
 
 /**

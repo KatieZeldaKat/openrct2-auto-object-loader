@@ -14,6 +14,10 @@ After all these objects are successfully loaded, the text will update to the fol
 
 ## Getting the plugin
 
+<!-- prettier-ignore -->
+> [!IMPORTANT]
+> Requires OpenRCT2 v0.4.6 or newer.
+
 Download the `.js` file from the [latest release](https://github.com/KatieZeldaKat/openrct2-auto-object-loader/releases/latest) and place it in the "plugin" folder. This can be found by opening OpenRCT2 and selecting "Open custom content folder" under the toolbox in the main menu.
 
 ---

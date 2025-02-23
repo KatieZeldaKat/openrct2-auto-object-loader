@@ -1,7 +1,7 @@
 import { isCompatibilityObject } from "./compatibilityObjects";
 
 const isSelectableObjectType: { [objectType in ObjectType]: boolean } = {
-    park_entrance: true,
+    park_entrance: parkEntrancesSupported(),
     station: true,
     ride: true,
     music: true,
@@ -37,4 +37,31 @@ export function isSelectable(object: InstalledObject): boolean {
     }
 
     return false;
+}
+
+function parkEntrancesSupported() {
+    // The API version when multiple park entrances became supported
+    if (context.apiVersion < 103) {
+        return false;
+    }
+
+    const parkEntrances = objectManager.getAllObjects("park_entrance");
+    if (parkEntrances.length > 1) {
+        return true;
+    }
+
+    let loadedEntrances = 0;
+    const installedObjects = objectManager.installedObjects;
+    for (let index = 0; loadedEntrances < 2 && index < installedObjects.length; index++) {
+        if (installedObjects[index].type === "park_entrance") {
+            const parkEntrance = objectManager.load(installedObjects[index].identifier);
+            if (parkEntrance) {
+                loadedEntrances += 1;
+            } else {
+                break;
+            }
+        }
+    }
+
+    return loadedEntrances < 2;
 }

@@ -1,17 +1,21 @@
-// @ts-ignore
-import * as info from "./info.js";
+import * as window from "./window/window";
+
+const menuItemText = "Automatic Object Loader";
 
 export function startup() {
-    // Write code here that should happen on startup of the plugin.
-    console.log("Hello world!");
-
-    // Register a menu item under the map icon:
-    if (typeof ui !== "undefined") {
-        ui.registerMenuItem(info.name, () => onClickMenuItem());
+    if (network.mode !== "none" || typeof ui === "undefined") {
+        return;
     }
-}
 
-function onClickMenuItem() {
-    // Write code here that should happen when the player clicks the menu item under the map icon.
-    console.log("Clicked menu item");
+    // Object Manager added in plugin API version 78
+    if (context.apiVersion < 78) {
+        ui.registerMenuItem(menuItemText, () => {
+            ui.showError("UNSUPPORTED VERSION", "Please update to OpenRCT2 v0.4.6 or later.");
+        });
+
+        return;
+    }
+
+    window.initialize();
+    ui.registerMenuItem(menuItemText, window.openWindow);
 }

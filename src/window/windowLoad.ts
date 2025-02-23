@@ -33,19 +33,13 @@ export function closeWindow() {
  * Opens window and loads objects.
  */
 export function openWindowAndLoad(filter: SourceFilter) {
-    openWindow();
+    window.open();
     text.set(loadingText);
 
     context.setTimeout(() => {
         loadAllObjects(filter);
-        text.set(loadedText);
-    }, 25);
-}
 
-function openWindow() {
-    if (isWindowOpen) {
         window.focus();
-    } else {
-        window.open();
-    }
+        text.set(loadedText);
+    }, 50);
 }

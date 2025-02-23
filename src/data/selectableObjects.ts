@@ -43,6 +43,8 @@ function parkEntrancesSupported() {
     // The API version when multiple park entrances became supported
     if (context.apiVersion < 103) {
         return false;
+    } else if (context.apiVersion > 103) {
+        return true;
     }
 
     const parkEntrances = objectManager.getAllObjects("park_entrance");
@@ -53,10 +55,15 @@ function parkEntrancesSupported() {
     let loadedEntrances = 0;
     const installedObjects = objectManager.installedObjects;
     for (let index = 0; loadedEntrances < 2 && index < installedObjects.length; index++) {
-        if (installedObjects[index].type === "park_entrance") {
+        if (
+            installedObjects[index].type === "park_entrance" &&
+            (!parkEntrances[0] ||
+                parkEntrances[0].identifier !== installedObjects[index].identifier)
+        ) {
             const parkEntrance = objectManager.load(installedObjects[index].identifier);
             if (parkEntrance) {
                 loadedEntrances += 1;
+                objectManager.unload(installedObjects[index].identifier);
             } else {
                 break;
             }

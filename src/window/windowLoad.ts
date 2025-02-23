@@ -1,5 +1,5 @@
-import { Colour, WindowTemplate, label, store, window as flexWindow } from "openrct2-flexui";
 import { SourceFilter, loadAllObjects } from "../objectLoader/objectLoader";
+import { Colour, WindowTemplate, label, store, window as flexWindow } from "openrct2-flexui";
 
 const loadingText = "Loading...";
 const loadedText = "Objects successfully loaded!";

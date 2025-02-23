@@ -30,7 +30,7 @@ let isWindowOpen = false;
 export function initialize() {
     windowLoad.initialize();
     window = flexWindow({
-        title: "Load All Objects",
+        title: "Automatic Object Loader",
         width: 325,
         height: "auto",
         position: "center",

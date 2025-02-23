@@ -1,4 +1,4 @@
-export const name = "load-all-objects";
+export const name = "auto-object-loader";
 export const authors = ["Katherine Norton (KatieZeldaKat)"];
 export const license = "MIT";
 

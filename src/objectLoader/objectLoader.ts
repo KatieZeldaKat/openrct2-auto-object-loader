@@ -4,7 +4,11 @@ import { TwoWayBinding } from "openrct2-flexui";
 export type SourceFilter = { [source in ObjectSourceGame]: TwoWayBinding<boolean> };
 
 export function loadAllObjects(filter: SourceFilter) {
-    objectManager.installedObjects.forEach((installedObject) => {
+    const objects = objectManager.installedObjects;
+    objects.sort((one, two) => {
+        return one.sourceGames.indexOf("custom") - two.sourceGames.indexOf("custom");
+    });
+    objects.forEach((installedObject) => {
         if (passesFilter(installedObject, filter) && isSelectable(installedObject)) {
             objectManager.load(installedObject.identifier);
         }
@@ -19,7 +23,7 @@ export function loadAllObjects(filter: SourceFilter) {
  * @returns True if the object passes the filter, false otherwise.
  */
 function passesFilter(object: InstalledObject, filter: SourceFilter): boolean {
-    return !object.sourceGames.every((source) => {
-        return !filter[source].twoway.get();
+    return object.sourceGames.some((source) => {
+        return filter[source].twoway.get();
     });
 }

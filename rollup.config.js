@@ -4,13 +4,13 @@ import typescript from "@rollup/plugin-typescript";
 import { exec } from "child_process";
 import { homedir } from "os";
 import { promisify } from "util";
-import { name, version } from "./src/info.js";
+import { name } from "./src/info.js";
 
 const options = {
     /**
      * The filename of the output, taken from info.js
      */
-    filename: `${name}-v${version}.js`,
+    filename: `${name}.js`,
 
     /**
      * Determines in what build mode the plugin should be build. The default here takes

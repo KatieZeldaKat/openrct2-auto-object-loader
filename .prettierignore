@@ -1,0 +1,2 @@
+# Ignore GitHub workflows
+.github/workflows/*
